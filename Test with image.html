@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenGuide</title>
+  <link rel="icon" href="favicon.jpg" type="image/jpeg"> <!-- Favicon added -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2e003e; /* Dark purple background */
+      color: #ffffff;
+      text-align: center;
+      padding: 50px;
+    }
+    img {
+      width: 600px;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    #searchResult {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .char-name {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Your Guide To Build Every Character In The Game</h1>
+  
+  <img src="https://images5.alphacoders.com/133/thumb-1920-1334085.jpeg" alt="Character image" />
+  
+  <!-- Search bar -->
+  <input type="text" id="searchBar" placeholder="Search for a character..." onkeyup="searchCharacter()" />
+
+  <!-- Result will be shown here -->
+  <div id="searchResult"></div>
+
+  <script>
+    // List of all characters
+    const characters = [
+      "The Traveler", "Albedo", "Alhaitham", "Aloy", "Amber", "Arataki Itto", "Arlecchino",
+      "Ayaka", "Ayato", "Baizhu", "Barbara", "Beidou", "Bennett", "Candace", "Childe", 
+      "Chongyun", "Collei", "Cyno", "Dainsleif", "Dehya", "Diluc", "Diona", "Dori", "Eula", 
+      "Faruzan", "Fischl", "Ganyu", "Gorou", "Heizou", "Hutao", "Jean", "Kaeya", "Kazuha", 
+      "Keqing", "Kirara", "Klee", "Kujou Sara", "Layla", "Lisa", "Mona", "Nahida", "Nilou", 
+      "Ningguang", "Noelle", "Qiqi", "Raiden Shogun", "Razor", "Rosaria", "Sangonomiya Kokomi", 
+      "Sayu", "Shenhe", "Sucrose", "Tartaglia", "Thoma", "Tighnari", "Venti", "Wanderer", 
+      "Xiao", "Xingqiu", "Xinyan", "Yae Miko", "Yanfei", "Yelan", "Yoimiya", "Yun Jin", "Zhongli"
+    ];
+
+    // Function to search the characters
+    function searchCharacter() {
+      const query = document.getElementById("searchBar").value.toLowerCase();
+      const resultDiv = document.getElementById("searchResult");
+
+      if (query) {
+        // Filter characters by query, checking both parts of two-word names
+        const filteredChars = characters.filter(char => {
+          const parts = char.toLowerCase().split(" ");
+          return parts.some(part => part.startsWith(query));
+        });
+
+        if (filteredChars.length > 0) {
+          // Display the filtered character names
+          resultDiv.innerHTML = "";
+          filteredChars.forEach(char => {
+            const charDiv = document.createElement("div");
+            charDiv.classList.add("char-name");
+            charDiv.innerText = char;
+            resultDiv.appendChild(charDiv);
+          });
+        } else {
+          resultDiv.innerHTML = "No characters found!";
+        }
+      } else {
+        resultDiv.innerHTML = "";
+      }
+    }
+  </script>
+</body>
+</html>
